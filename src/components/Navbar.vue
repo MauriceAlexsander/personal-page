@@ -19,30 +19,22 @@
         <ExternalLinks/>
       </div>
 
-      <Sidebar v-if="window_width < 1080" @closeSidebar="isExtended = false" :isExtended="isExtended"/>
+      <Sidebar v-if="mobile" @closeSidebar="isExtended = false" :isExtended="isExtended"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref, onMounted, onBeforeUnmount } from 'vue';
+import { Ref, ref } from 'vue';
 import ExternalLinks from './ExternalLinks.vue';
 import Sidebar from '@/components/Sidebar.vue';
+import { useBreakpoints } from '@vueuse/core';
+
+const breakpoints = useBreakpoints({desktop: 1081,})
+const mobile = breakpoints.smaller('desktop')
 
 // Data
 const isExtended: Ref<boolean> = ref(false)
-const window_width = ref(0)
-
-const onResize = () => {
-  window_width.value = window.innerWidth
-}
-
-onMounted(() => {
-  window.addEventListener('resize', onResize)
-})
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', onResize)
-})
 </script>
 
 <style scoped>
