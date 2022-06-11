@@ -4,14 +4,13 @@
       <div class="sidebar">
         <div class="header">
           <p @click="closeSidebar()">+</p>
-          <ExternalLinks />
         </div>
 
         <div class="routes">
-          <router-link @click.prevent="closeSidebar()" to="/">Home</router-link>
-          <router-link @click.prevent="closeSidebar()" to="/about">About</router-link>
-          <router-link @click.prevent="closeSidebar()" to="/stack">My Stack</router-link>
-          <router-link @click.prevent="closeSidebar()" to="/contact">Contact</router-link>
+          <router-link to="/">Home</router-link>
+          <router-link to="/about">About</router-link>
+          <router-link to="/stack">My Stack</router-link>
+          <router-link to="/contact">Contact</router-link>
         </div>
       </div>
     </div>
@@ -20,14 +19,11 @@
 
 <script lang="ts" setup>
 import { defineProps, defineEmits } from 'vue';
-import ExternalLinks from "./ExternalLinks.vue";
 const emit = defineEmits(['closeSidebar'])
+const closeSidebar = () => emit('closeSidebar')
 
 // Props
 const props = defineProps({isExtended: Boolean})
-
-const closeSidebar = () => emit('closeSidebar')
-
 </script>
 
 <style scoped>
